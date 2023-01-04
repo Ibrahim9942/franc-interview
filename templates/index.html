@@ -1,4 +1,32 @@
 <html>
+
+    <style>
+      .timeline {
+        list-style: none;
+      }
+      .timeline-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #d9d9d9;
+        padding-bottom: 20px;
+      }
+      .timeline-item .date {
+        font-size: 0.8em;
+        color: #999;
+        margin-right: 10px;
+      }
+      .timeline-item .status {
+        margin-right: 10px;
+      }
+      .timeline-item .user {
+        font-weight: bold;
+        color: #369f6f;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+    </style>
+
     <body>
         <h1>Hello!
         {% if username %}
@@ -11,9 +39,15 @@
             <p>Posts can be found <a href="/posts">here</a></p>
             <p>Users and there follows can be found <a href="/users">here</a></p>
         {% else %}
-            <p>Your tweets:</p>
-            <ul>
-                <li>first tweet</li>
+            <p>Your timeline:</p>
+            <ul class="timeline">
+                  {% for post in posts %}
+                    <li class="timeline-item">
+                      <span class="date">{{ post.time }}</span>
+                      <span class="user">{{ post.user }}: </span>
+                      <div class="status">{{ post.status }}</div>
+                    </li>
+                  {% endfor %}
             </ul>
         {% endif %}
     </body>
